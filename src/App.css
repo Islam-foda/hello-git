@@ -56,7 +56,7 @@
   }
 }
 
-#center {
+/* #center {
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -67,6 +67,169 @@
   @media (max-width: 1024px) {
     padding: 32px 20px 24px;
     gap: 18px;
+  }
+} */
+
+#center {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333333;
+}
+
+/* عنوان القسم الرئيسي (يمكن إخفاؤه أو تنسيقه كعنوان جانبي) */
+#center h1 {
+  font-size: 1.2rem;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 5px;
+}
+
+/* اسم الشخص (تنسيق بارز كأعلى السيرة الذاتية) */
+#center h4 {
+  font-size: 2.2rem;
+  color: #2d3748;
+  margin: 0 0 15px 0;
+  font-weight: 700;
+}
+
+/* تنسيق فقرات البيانات (الإيميل، الهاتف، إلخ) */
+#center p {
+  font-size: 1rem;
+  color: #4a5568;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* إعطاء مظهر مميز وجريء للكلمات المفتاحية (Name, email, mobile) */
+#center p strong,
+#center p::before {
+  font-weight: 650;
+  color: #1a202c;
+  text-transform: capitalize;
+}
+
+/* تعديل بسيط على طريقة عرض النصوص داخل الـ CV ليصبح مرناً */
+@media (max-width: 480px) {
+  #center {
+    margin: 15px;
+    padding: 20px;
+  }
+  #center h4 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Container for the entire form */
+form {
+  /* max-width: 1000px; */
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Creates a structured layout */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 2 equal columns */
+  gap: 16px 20px; /* 16px row gap, 20px column gap */
+}
+
+/* Individual elements handling inside the grid */
+form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  text-transform: capitalize;
+  margin-bottom: -10px; /* Brings label closer to its input */
+}
+
+form input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: #2d3748;
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* Focus effects */
+form input:focus {
+  background-color: #ffffff;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+
+form input::placeholder {
+  color: #a0aec0;
+  font-size: 0.95rem;
+}
+
+/* --- GRID POSITIONING RULES --- */
+
+/* 1. Make Email, Mobile, and Button span across BOTH columns full-width */
+form label[htmlFor="email"],
+form input[name="email"],
+form label[htmlFor="mobile"],
+form input[name="mobile"],
+form button[type="submit"] {
+  grid-column: span 3;
+}
+
+/* 2. Styling the Save Button */
+button[type="submit"] {
+  margin-top: 10px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #3182ce;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(49, 130, 206, 0.2);
+}
+
+form button[type="submit"]:hover {
+  background-color: #2b6cb0;
+}
+
+form button[type="submit"]:active {
+  transform: scale(0.99);
+}
+
+/* Responsive adjustment for Mobile viewports */
+@media (max-width: 480px) {
+  form {
+    grid-template-columns: 1fr; /* Stack everything vertically on mobile screens */
+    margin: 15px;
+    padding: 20px;
+  }
+
+  /* Reset full span so elements flow natively in 1 column */
+  form label[htmlFor="email"],
+  form input[name="email"],
+  form label[htmlFor="mobile"],
+  form input[name="mobile"],
+  form button[type="submit"] {
+    grid-column: span 1;
   }
 }
 
@@ -167,7 +330,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -4.5px;
     border: 5px solid transparent;

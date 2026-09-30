@@ -5,7 +5,7 @@ import BasicInfo from "./assets/components/BasicInfo";
 
 function App() {
   const [person, setPerson] = useState({});
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,11 +15,11 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setEditing((preValue) => !preValue);
-    console.log(person);
   };
 
   return (
     <>
+    <h1><i>Curriculum Vita</i></h1>
       {editing ? (
         <EditForm
           handleChange={handleChange}
@@ -30,8 +30,8 @@ function App() {
         <BasicInfo data={person} />
       )}
       <section id="spacer">
-        <button type="submit" onClick={handleSubmit}>
-          {editing ? "Save changes" : "Create CV"}
+        <button  onClick={handleSubmit}>
+          {editing ? "Save changes" : "Update CV"}
         </button>
       </section>
     </>

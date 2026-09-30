@@ -1,20 +1,16 @@
 import React from "react";
 
 export default function BasicInfo({ data }) {
-  console.log(data);
+  const { fname, lname, email, mobile } = data;
 
   return (
-    <>
-      <section id="center">
-        <h1>Result</h1>
-        <span>your name:</span>
-        {Object.values(data).map((value, index,arr) => (
-          <>
-            {/* <p key={index}>{value}</p> */}
-            <h2>{arr.join(" ")}</h2>
-          </>
-        ))}
-      </section>
-    </>
+   <>
+  <section id="center">
+    <h4>{fname.toUpperCase()} {lname}</h4>
+    
+    <p><strong>Email:</strong> {email}</p>
+    <p><strong>Mobile:</strong> {mobile}</p>
+  </section>
+</>
   );
 }
