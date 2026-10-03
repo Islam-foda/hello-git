@@ -1,8 +1,46 @@
-export default function EditForm({ handleChange, onsubmit, person }) {
+export function ProExpInput({ handleExpChange, exp, removeExp }) {
+  return (
+    <>
+      <label htmlFor="company">Company Name</label>
+      <input
+        type="text"
+        name="company"
+        id="company"
+        value={exp.company}
+        onChange={(e) => handleExpChange(exp.id, e)}
+        placeholder="Company Name"
+        autoComplete="given-name"
+        required
+      />
+      <label htmlFor="role">title</label>
+      <input
+        type="text"
+        name="role"
+        id="role"
+        value={exp.role}
+        onChange={(e) => handleExpChange(exp.id, e)}
+        placeholder="role"
+        autoComplete="given-name"
+        required
+      />
+      <button type="button" onClick={() => removeExp(exp.id)}>
+        Remove
+      </button>
+    </>
+  );
+}
+
+export default function EditForm({
+  person,
+  handleChange,
+  handleExpChange,
+  addExp,
+  removeExp,
+}) {
   return (
     <>
       <section id="">
-        <form onSubmit={onsubmit} action="post">
+        <form onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="fname">First Name</label>
           <input
             type="text"
@@ -50,6 +88,19 @@ export default function EditForm({ handleChange, onsubmit, person }) {
             required
           />
           <button type="submit">Save Change</button>
+          <h3>Work Experience</h3>
+          {person.workExp.map((exp) => (
+            <ProExpInput
+              key={exp.id}
+              exp={exp}
+              handleExpChange={handleExpChange}
+              removeExp={removeExp}
+            />
+          ))}
+
+          <button type="button" onClick={addExp}>
+            + Add work experience
+          </button>
         </form>
       </section>
     </>
