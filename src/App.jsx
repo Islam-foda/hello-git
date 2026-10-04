@@ -8,6 +8,7 @@ const emptyExp = () => ({
   id: crypto.randomUUID(),
   company: "",
   role: "",
+  period:{startAt:Date,endAt:Date}
 });
 
 function App() {
@@ -57,30 +58,30 @@ function App() {
   };
 
   return (
-    <>
-      <h1>
-        <i>Curriculum Vita</i>
-      </h1>
-      {editing ? (
-        <EditForm
-          person={person}
-          handleChange={handleChange}
-          handleExpChange={handleExpChange}
-          addExp={addExp}
-          removeExp={removeExp}
-        />
-      ) : (
-        <>
-          <BasicInfo data={person} />
-          <ProInfo data={person}/>
-        </>
-      )}
-      <section id="spacer">
-        <button onClick={handleSubmit}>
-          {editing ? "Save changes" : "Update CV"}
-        </button>
-      </section>
-    </>
+    <main className="cv-app">
+      <h1 className="app-title">Curriculum Vitae</h1>
+      <form className="cv-form" onSubmit={handleSubmit}>
+        {editing ? (
+          <EditForm
+            person={person}
+            handleChange={handleChange}
+            handleExpChange={handleExpChange}
+            addExp={addExp}
+            removeExp={removeExp}
+          />
+        ) : (
+          <div className="cv-preview">
+            <BasicInfo data={person} />
+            <ProInfo data={person} />
+          </div>
+        )}
+        <div className="form-actions">
+          <button className="button button-primary" type="submit">
+            {editing ? "Save changes" : "Update CV"}
+          </button>
+        </div>
+      </form>
+    </main>
   );
 }
 
