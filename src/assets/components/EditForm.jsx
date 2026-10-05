@@ -1,3 +1,5 @@
+import EduExpInput from "./EduExpInput";
+
 export function ProExpInput({ handleExpChange, exp, removeExp }) {
   return (
     <div className="experience-fields">
@@ -33,21 +35,36 @@ export function ProExpInput({ handleExpChange, exp, removeExp }) {
           type="month"
           name="startAt"
           id={`startAt-${exp.id}`}
-          value={exp.startAt}
-          onChange={(e)=>handleExpChange(exp.id, e)}
+          value={exp.startAt ?? ""}
+          onChange={(e) => handleExpChange(exp.id, e)}
           autoComplete="organization-startAt"
           required
         />
       </div>
-        <div className="form-field">
+      <div className="form-field">
         <label htmlFor={`endAt-${exp.id}`}>To</label>
         <input
           type="month"
           name="endAt"
           id={`endAt-${exp.id}`}
-          value={exp.endAt}
-          onChange={(e)=>handleExpChange(exp.id, e)}
+          value={exp.endAt ?? ""}
+          onChange={(e) => handleExpChange(exp.id, e)}
           autoComplete="organization-endAt"
+          required
+        />
+      </div>
+      <div className="form-field">
+        <label htmlFor={`responsibilities-${exp.id}`}>Responsibilites</label>
+        <textarea
+          type="text"
+          name="responsibilities"
+          rows="4"
+          cols="50"
+          maxLength="300"
+          id={`responsibilities-${exp.id}`}
+          value={exp.responsibilities}
+          onChange={(e) => handleExpChange(exp.id, e)}
+          autoComplete="organization-responsibilities"
           required
         />
       </div>
@@ -68,6 +85,9 @@ export default function EditForm({
   handleExpChange,
   addExp,
   removeExp,
+  handleEduChange,
+  addEdu,
+  removeEdu,
 }) {
   return (
     <section className="edit-form" aria-labelledby="edit-form-heading">
@@ -129,6 +149,18 @@ export default function EditForm({
             required
           />
         </div>
+        <div className="form-field">
+          <label htmlFor="social">Links</label>
+          <input
+            type="url"
+            name="social"
+            id="social"
+            value={person.social}
+            onChange={handleChange}
+            placeholder="enter social links"
+            autoComplete="url"
+          />
+        </div>
       </div>
       <div className="experience-editor">
         <div className="experience-editor-heading">
@@ -147,6 +179,26 @@ export default function EditForm({
             exp={exp}
             handleExpChange={handleExpChange}
             removeExp={removeExp}
+          />
+        ))}
+      </div>
+      <div className="experience-editor">
+        <div className="experience-editor-heading">
+          <h2 className="section-heading">Education experience</h2>
+          <button
+            className="button button-secondary"
+            type="button"
+            onClick={addEdu}
+          >
+            + Add Education
+          </button>
+        </div>
+        {person.eduExp.map((edu) => (
+          <EduExpInput
+            key={edu.id}
+            edu={edu}
+            handleEduChange={handleEduChange}
+            removeEdu={removeEdu}
           />
         ))}
       </div>

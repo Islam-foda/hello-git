@@ -1,7 +1,9 @@
-
-
 export default function BasicInfo({ data }) {
-  const { fname, lname, email, mobile } = data;
+  const { fname, lname, email, mobile, social } = data;
+  
+  const socialMatch = social.match(/^(?:https?:\/\/)?(?:www\.)?([^\\/.]+)\./)[1];
+  
+  
 
   return (
     <section className="cv-card personal-info" aria-labelledby="person-name">
@@ -16,6 +18,12 @@ export default function BasicInfo({ data }) {
         <p className="contact-item">
           <strong>Mobile</strong>
           <span>{mobile}</span>
+        </p>
+        <p className="contact-item">
+          <strong>Links</strong>
+          <span>
+            <a href={social}target="blank" rel="noopener ">{socialMatch}</a>
+          </span>
         </p>
       </div>
     </section>

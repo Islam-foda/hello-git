@@ -3,12 +3,21 @@ import "./App.css";
 import EditForm from "./assets/components/EditForm";
 import BasicInfo from "./assets/components/BasicInfo";
 import ProInfo from "./assets/components/ProInfo";
+import EduInfo from "./assets/components/EduInfo";
 
 const emptyExp = () => ({
   id: crypto.randomUUID(),
   company: "",
   role: "",
-  period:{startAt:Date,endAt:Date}
+  period: { startAt: Date, endAt: Date },
+  responsibilities: "",
+});
+
+const emptyEdu = () => ({
+  id: crypto.randomUUID(),
+  school: "",
+  title: "",
+  period: { GraduateAt: Date },
 });
 
 function App() {
@@ -17,7 +26,9 @@ function App() {
     lname: "",
     email: "",
     mobile: "",
+    social:"",
     workExp: [emptyExp()],
+    eduExp:[emptyEdu()]
   });
 
   const [editing, setEditing] = useState(true);
@@ -26,7 +37,7 @@ function App() {
     const { name, value } = e.target;
     setPerson((preValue) => ({ ...preValue, [name]: value }));
   };
-
+//handle Professional Experience
   const handleExpChange = (id, e) => {
     const { name, value } = e.target;
     setPerson((prev) => ({
@@ -44,11 +55,35 @@ function App() {
     }));
   };
 
-  // Remove a block
   const removeExp = (id) => {
     setPerson((prev) => ({
       ...prev,
       workExp: prev.workExp.filter((item) => item.id !== id),
+    }));
+  };
+
+  //Handle Education Experience
+    const handleEduChange = (id, e) => {
+    const { name, value } = e.target;
+    setPerson((prev) => ({
+      ...prev,
+      eduExp: prev.eduExp.map((item) =>
+        item.id === id ? { ...item, [name]: value } : item,
+      ),
+    }));
+  };
+
+  const addEdu = () => {
+    setPerson((prev) => ({
+      ...prev,
+      eduExp: [...prev.eduExp, emptyEdu()],
+    }));
+  };
+
+  const removeEdu = (id) => {
+    setPerson((prev) => ({
+      ...prev,
+      eduExp: prev.eduExp.filter((item) => item.id !== id),
     }));
   };
 
@@ -68,11 +103,15 @@ function App() {
             handleExpChange={handleExpChange}
             addExp={addExp}
             removeExp={removeExp}
+            handleEduChange={handleEduChange}
+            addEdu={addEdu}
+            removeEdu={removeEdu}
           />
         ) : (
           <div className="cv-preview">
             <BasicInfo data={person} />
             <ProInfo data={person} />
+            <EduInfo data={person}/>
           </div>
         )}
         <div className="form-actions">
